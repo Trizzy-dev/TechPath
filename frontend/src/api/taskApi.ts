@@ -8,7 +8,7 @@ export type Task = {
   isArchived?: boolean;
 };
 
-const API_URL = "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export async function getAllTasks(): Promise<Task[]> {
   const response = await fetch(`${API_URL}/api/tasks`);
