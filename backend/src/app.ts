@@ -17,11 +17,11 @@ app.get("/", (_req, res) => {
 
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
-app.use("/api/progress", progressRoutes)
+app.use("/api/progress", progressRoutes);
 app.use("/api/resources", resourceRoutes);
 
-const PORT = 5000;
+const PORT = Number(process.env.PORT) || 5000;
 
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });

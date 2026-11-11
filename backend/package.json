@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/app.ts",
-    "postinstall": "prisma skills sync || exit 0",
-    "contract:emit": "prisma contract emit"
-  },
+  "dev": "tsx watch src/app.ts",
+  "start": "tsx src/app.ts",
+  "postinstall": "prisma skills sync || exit 0",
+  "contract:emit": "prisma contract emit"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
