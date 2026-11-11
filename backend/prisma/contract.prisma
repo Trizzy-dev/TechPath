@@ -1,0 +1,52 @@
+// use prisma-8
+
+model User {
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("learner")
+  createdAt    TimestamptzString @default(now())
+  updatedAt    temporal.updatedAtString()
+
+  progress     Progress[]
+}
+
+model Task {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  position    Int      @unique
+  difficulty  String
+  isPublished Boolean  @default(false)
+  isArchived  Boolean  @default(false)
+  createdAt   TimestamptzString @default(now())
+  updatedAt   temporal.updatedAtString()
+
+  progress    Progress[]
+  resources   Resource[] 
+}
+
+model Progress {
+  id          Int      @id @default(autoincrement())
+  userId      Int
+  taskId      Int
+  status      String
+  startedAt   TimestamptzString?
+  completedAt TimestamptzString?
+
+  user        User       @relation(fields: [userId], references: [id])
+  task        Task       @relation(fields: [taskId], references: [id])
+
+  @@unique([userId, taskId])
+}
+
+model Resource {
+  id      Int    @id @default(autoincrement())
+  taskId  Int
+  title   String
+  url     String
+  type    String
+
+  task    Task   @relation(fields: [taskId], references: [id])
+}
